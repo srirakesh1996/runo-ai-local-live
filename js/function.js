@@ -54,7 +54,7 @@
       spaceBetween: 30,
       loop: true,
       autoplay: {
-        delay: 500000,
+        delay: 5000,
       },
       navigation: {
         nextEl: ".testimonial-next-btn",
@@ -75,18 +75,21 @@
         const label = this.getAttribute("data-label");
         const pagePath = window.location.pathname;
 
-        //    console.log("Button clicked:", label);
-        //   console.log("Page path:", pagePath);
-
-        // Send GA4 event with page path
-        gtag("event", "button_click", {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "button_click",
           event_category: "CTA",
           event_label: label,
-          page_path: pagePath, // Custom dimension (optional for GA4)
+          page_path: pagePath,
         });
 
-        // Optional: prevent default for debugging
-        // event.preventDefault();
+        // For debugging:
+        // console.log("DataLayer push:", {
+        //   event: "button_click",
+        //   event_category: "CTA",
+        //   event_label: label,
+        //   page_path: pagePath,
+        // });
       });
     });
   });
