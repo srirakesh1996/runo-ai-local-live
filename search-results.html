@@ -656,15 +656,31 @@
             </div>
         </div>
 
+        <!-- Video Modal -->
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="videoModal" tabindex="-1">
-            <div class="modal-dialog modal-lg">
+        <style>
+            .vide {
+
+                max-width: 60%;
+                margin: auto;
+                top: 18%;
+
+            }
+
+            @media (max-width: 768px) {
+                .vide {
+                    max-width: 90%;
+                    top: 35%;
+                }
+            }
+        </style>
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg vide">
                 <div class="modal-content">
-                    <button type="button" class="close"
-                        style="position:absolute;top:10px;right:20px;color:#fff;z-index:9999;"
-                        data-dismiss="modal">&times;</button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+                        style="position: absolute; right: 15px; top: 15px; z-index: 9999; color: #ffffff;font-size:20px">
+                    </button>
                     <div class="modal-body" style="padding:0">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe id="videoFrame" class="embed-responsive-item" allowfullscreen></iframe>
@@ -704,13 +720,16 @@
             }
 
             // Modal video play
+            // Play video on card click
             $(document).on("click", ".video-card", function () {
                 const videoId = $(this).data("video-id");
-                $("#videoFrame").attr("src", "https://www.youtube.com/embed/" + videoId + "?autoplay=1");
+                const videoUrl = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+                $("#videoFrame").attr("src", videoUrl);
                 $("#videoModal").modal("show");
             });
 
-            // Stop video on close
+
+            // Stop video when modal is closed
             $("#videoModal").on("hidden.bs.modal", function () {
                 $("#videoFrame").attr("src", "");
             });
