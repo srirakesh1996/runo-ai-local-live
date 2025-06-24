@@ -1,3 +1,8 @@
+   .pad-15 {
+
+       padding: 0px 15px !important;
+   }
+
    .nav {
        padding-left: 0;
        margin-bottom: 0;
@@ -10,7 +15,7 @@
        width: 180px;
        position: relative;
        display: block;
-       margin: 10px;
+       margin: 15px;
    }
 
    .nav>li>a {
@@ -146,11 +151,31 @@
        object-fit: cover;
    }
 
+
    .nav-pills {
        display: flex;
-       /* justify-content: center; */
        flex-wrap: nowrap;
-       overflow-x: scroll;
+       overflow-x: auto;
+       /* better cross-browser than scroll */
+       scrollbar-color: #ccc transparent;
+       /* Firefox */
+       scrollbar-width: thin;
+       /* Firefox */
+   }
+
+   /* Chrome, Edge, Safari */
+   .nav-pills::-webkit-scrollbar {
+       height: 6px;
+   }
+
+   .nav-pills::-webkit-scrollbar-track {
+       background: #e0e0e0;
+       /* visible scrollbar track */
+   }
+
+   .nav-pills::-webkit-scrollbar-thumb {
+       background-color: #888;
+       border-radius: 10px;
    }
 
    #videoModal .modal-box {
