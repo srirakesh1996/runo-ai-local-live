@@ -160,8 +160,20 @@
        scrollbar-color: #ccc transparent;
        /* Firefox */
        scrollbar-width: thin;
+       justify-content: center;
        /* Firefox */
    }
+
+   @media only screen and (max-width: 600px) {
+
+       .nav-pills {
+
+           justify-content: left !important;
+       }
+
+   }
+
+
 
    /* Chrome, Edge, Safari */
    .nav-pills::-webkit-scrollbar {
