@@ -108,6 +108,44 @@
     });
   }
 })(jQuery);
+
+/* Send utm to web.runo.in Starts */
+document.addEventListener("DOMContentLoaded", function () {
+  const interval = setInterval(() => {
+    const buttons = document.querySelectorAll(".runo-web-crm");
+
+    if (buttons.length > 0) {
+      clearInterval(interval);
+
+      const utmSource = localStorage.getItem("utm_source");
+      const utmCampaign = localStorage.getItem("utm_campaign");
+
+      const baseUrl = "https://web.runo.in";
+      const params = new URLSearchParams();
+
+      if (utmSource) params.append("utm_source", utmSource);
+      if (utmCampaign) params.append("utm_campaign", utmCampaign);
+
+      if (params.toString()) {
+        const finalUrl = `${baseUrl}?${params.toString()}`;
+        console.log("✅ Updating all .runo-crm buttons to:", finalUrl);
+
+        buttons.forEach((btn) => {
+          // Set href
+          btn.href = finalUrl;
+
+          // Force redirect on click
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = finalUrl;
+          });
+        });
+      }
+    }
+  }, 100);
+});
+/* Send utm to web.runo.in ends */
+
 function submitForm(formId, formData, formToken) {
   const $form = $(`#${formId}`);
   const $btn = $form.find("button[type='submit']");

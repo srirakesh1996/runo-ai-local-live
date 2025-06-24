@@ -59,15 +59,7 @@
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/js/intlTelInput.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/js/utils.js"></script>
   <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-M7SSPG7W');
-  </script>
+
   <!-- End Google Tag Manager -->
   <!-- Optional: WOW.js & Animate.css -->
   <!--
@@ -488,7 +480,7 @@
                   <p class="banner-btn1">&nbsp;</p>
                 </div>
                 <div class="hero-btn">
-                  <a class="btn-default btn-highlighted track-btn" href="https://web.runo.in"
+                  <a class="btn-default btn-highlighted track-btn runo-web-crm" href="https://web.runo.in"
                     data-label="Start 10-day free trial - Home Banner">Start 10-day free trial</a>
                   <p style="font-size:13px">No Credit Card Required</p>
                 </div>
@@ -1455,9 +1447,14 @@
       </div>
       <div class="text-center mt-50 overlap" id="credit">
         <div class="mt-4 wow animate__fadeInUp" data-wow-delay="0.8s">
-          <a href="https://web.runo.in" class="btn-default btn-highlighted">Start 10-day free trial</a>
+          <a class="btn-default btn-highlighted track-btn runo-web-crm"
+            data-label="Start 10-day free trial - Home Comparision" href="https://web.runo.in">Start 10-day free
+            trial</a>
+
           <p>No Credit Card Required</p>
         </div>
+
+
       </div>
     </div>
   </section>
@@ -1630,7 +1627,7 @@
       <div class="text-center overlap" id="credit">
         <div class="mt-4">
           <a href="https://web.runo.in" class="btn-default btn-highlighted track-btn"
-            data-label="Book a Demo - Home Comparision">Start 10-day free trial</a>
+            data-label="Book a Demo - Home Comparision" id="web-crm">Start 10-day free trial</a>
           <p>No Credit Card Required</p>
         </div>
       </div>
@@ -1897,7 +1894,7 @@
         One App To Manage Calls, <br> Follow-ups, and Sales
       </h2>
       <a href="#" data-bs-toggle="modal" data-bs-target="#requestDemoModal"
-        data-label="Start 10-day free trial - Home CTA 2" class="btn-schedule track-btn">
+        data-label="Start 10-day free trial - Home CTA 2" class="btn-schedule track-btn" id="web-crm">
         Schedule Your Demo
       </a>
       <div class="store-buttons">
