@@ -20,7 +20,7 @@
     <!-- Responsive Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <!-- SEO Meta -->
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="noindex, nofollow, noarchive">
     <!-- changed from no-index -->
     <meta name="language" content="English">
     <!-- Open Graph / Facebook -->
@@ -656,31 +656,15 @@
             </div>
         </div>
 
-        <!-- Video Modal -->
 
 
-        <style>
-            .vide {
-
-                max-width: 60%;
-                margin: auto;
-                top: 18%;
-
-            }
-
-            @media (max-width: 768px) {
-                .vide {
-                    max-width: 90%;
-                    top: 35%;
-                }
-            }
-        </style>
-        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg vide">
+        <!-- Modal -->
+        <div class="modal fade" id="videoModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
-                        style="position: absolute; right: 15px; top: 15px; z-index: 9999; color: #ffffff;font-size:20px">
-                    </button>
+                    <button type="button" class="close"
+                        style="position:absolute;top:10px;right:20px;color:#fff;z-index:9999;"
+                        data-dismiss="modal">&times;</button>
                     <div class="modal-body" style="padding:0">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe id="videoFrame" class="embed-responsive-item" allowfullscreen></iframe>
@@ -720,16 +704,13 @@
             }
 
             // Modal video play
-            // Play video on card click
             $(document).on("click", ".video-card", function () {
                 const videoId = $(this).data("video-id");
-                const videoUrl = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
-                $("#videoFrame").attr("src", videoUrl);
+                $("#videoFrame").attr("src", "https://www.youtube.com/embed/" + videoId + "?autoplay=1");
                 $("#videoModal").modal("show");
             });
 
-
-            // Stop video when modal is closed
+            // Stop video on close
             $("#videoModal").on("hidden.bs.modal", function () {
                 $("#videoFrame").attr("src", "");
             });

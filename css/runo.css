@@ -2040,10 +2040,10 @@ th {
 }
 
 .page-title {
-  background: linear-gradient(145deg, #ff5a34 0%, #ff784e 50%, #ffb65c 100%);
-
-  position: relative;
-
+  background: url(../img/background-cta.webp) no-repeat center center;
+  background-size: cover;
+  color: white;
+  text-align: center;
   padding: 40px 0;
 }
 
@@ -2065,16 +2065,17 @@ th {
 }
 
 .tagline {
-  border: 1px solid #fff;
-  color: #ffffff !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  /* Adds readability */
   display: inline-block;
-  padding: 10px 30px;
-  margin: 20px;
-  border-radius: 50px;
+  margin: 20px auto;
+  padding-bottom: 4px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: #000;
+  border-bottom: 2px solid #fff;
+  background: transparent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .title-content {
