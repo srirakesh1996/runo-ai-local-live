@@ -2,18 +2,18 @@
 <html lang="en-US">
 
 <head>
-    <title>Your Ultimate Guide to Mastering Sales - Runo Academy</title>
+    <title>Frequently Asked Questions - Runo</title>
     <meta name="description"
-        content="Explore 140+ bite-sized videos designed to help you unlock the full potential of Runo—one feature at a time.">
+        content="Find quick answers to common questions about Runo’s SIM-based CRM, features, setup, integrations, pricing, and support. Get the help you need, fast.">
     <!-- Updated Open Graph tags -->
-    <meta property="og:title" content="Your Ultimate Guide to Mastering Sales - Runo Academy">
+    <meta property="og:title" content="Contact Us - Runo">
     <meta property="og:description"
-        content="Explore 140+ bite-sized videos designed to help you unlock the full potential of Runo—one feature at a time.">
+        content="Find quick answers to common questions about Runo’s SIM-based CRM, features, setup, integrations, pricing, and support. Get the help you need, fast.">
     <!-- Updated Twitter tags -->
-    <meta name="twitter:title" content="Your Ultimate Guide to Mastering Sales - Runo Academy">
+    <meta name="twitter:title" content="Contact Us - Runo">
     <meta name="twitter:description"
-        content="Explore 140+ bite-sized videos designed to help you unlock the full potential of Runo—one feature at a time.">
-    <link rel="canonical" href="https://runo.ai/about-us" />
+        content="Find quick answers to common questions about Runo’s SIM-based CRM, features, setup, integrations, pricing, and support. Get the help you need, fast.">
+    <link rel="canonical" href="https://runo.ai/product-faqs" />
     <!-- Character Set and Compatibility -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -429,13 +429,13 @@
                 <div class="row">
                     <div class="title-content  fadeIn" data--delay="0.3s">
                         <div class="col-lg-12">
-                            <div class="tagline" data--delay="0.4s">Runo Academy FAQ's</div>
+                            <div class="tagline" data--delay="0.4s"> Runo FAQ</div>
                             <h2 class="text-anime-style-2" data--delay="0.6s" data-cursor="-opaque">
-                                Everything You Need to Know, All in One Place
+                                All the Answers You Need, Right Here
                             </h2>
                             <p class="" data--delay="0.8s">
-                                Find quick answers to common questions and get the clarity you need to make the most of
-                                our platform.
+                                Quickly find solutions to common questions and gain the clarity to maximize your
+                                experience with our platform.
                             </p>
                         </div>
                     </div>
@@ -466,6 +466,60 @@
                         <li><a href="#user" role="tab" data-toggle="tab">User</a></li>
                     </ul>
 
+                    <div class="col-md-6 col-md-offset-3" style="margin: 0 auto;">
+                        <div class="input-group">
+                            <input type="text" id="faqSearch" class="form-control" placeholder="Search faqs..."
+                                style="padding: 21px !important;border-radius:0px !important;">
+                            <span class="input-group-btn">
+                                <button class="btn btn-search" id="searchBtn" type="button"
+                                    style="padding: 9px !important;">
+                                    <i class="fas fa-search" style="color:#f44336;"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <script>
+                        function performSearch() {
+                            const search = document.getElementById("faqSearch").value.trim().toLowerCase();
+                            if (!search) return;
+
+                            const results = [];
+
+                            document.querySelectorAll(".accordion-item").forEach((item, index) => {
+                                const question = item.querySelector(".accordion-button")?.innerText.trim();
+                                const answer = item.querySelector(".accordion-body")?.innerText.trim();
+
+                                const tabPane = item.closest(".tab-pane");
+                                let category = "Uncategorized";
+                                if (tabPane) {
+                                    const tabId = tabPane.id.toLowerCase();
+                                    if (tabId.includes("admin")) category = "Admin";
+                                    else if (tabId.includes("manager")) category = "Manager";
+                                    else if (tabId.includes("user")) category = "User";
+                                    else if (tabId.includes("general")) category = "General";
+                                }
+
+                                if ((question && question.toLowerCase().includes(search)) ||
+                                    (answer && answer.toLowerCase().includes(search))) {
+                                    results.push({ question, answer, category });
+                                }
+                            });
+
+                            sessionStorage.setItem("faqSearchResults", JSON.stringify(results));
+                            sessionStorage.setItem("faqSearchTerm", search);
+
+                            window.location.href = "search-faq";
+                        }
+
+                        document.getElementById("faqSearch").addEventListener("keypress", function (e) {
+                            if (e.key === "Enter") performSearch();
+                        });
+
+                        document.getElementById("searchBtn").addEventListener("click", performSearch);
+                    </script>
+
+
                     <div class="tab-content mt-30">
 
                         <!-- ===== General FAQ's ===== -->
@@ -486,7 +540,7 @@
                                                             What is Runo SIM-based Call Management CRM?
                                                         </button>
                                                     </h2>
-                                                    <div id="collapse1" class="accordion-collapse collapse show"
+                                                    <div id="collapse1" class="accordion-collapse collapse"
                                                         aria-labelledby="heading1" data-bs-parent="#accordionRuno">
                                                         <div class="accordion-body">
                                                             Runo is a mobile-first CRM platform that helps businesses
@@ -1326,7 +1380,7 @@
                                                             Which CRMs can Runo integrate with?
                                                         </button>
                                                     </h2>
-                                                    <div id="collapse96" class="accordion-collapse collapse show"
+                                                    <div id="collapse96" class="accordion-collapse collapse"
                                                         aria-labelledby="heading96" data-bs-parent="#accordionRuno2">
                                                         <div class="accordion-body">
                                                             Runo supports integration with Zoho, Freshsales,
@@ -1870,7 +1924,7 @@
                                                             What types of reports does Runo offer?
                                                         </button>
                                                     </h2>
-                                                    <div id="collapse85" class="accordion-collapse collapse show"
+                                                    <div id="collapse85" class="accordion-collapse collapse"
                                                         aria-labelledby="heading85" data-bs-parent="#accordionRuno3">
                                                         <div class="accordion-body">
                                                             Runo provides all call logs, dispositions, customers,
@@ -2077,7 +2131,7 @@
                                                             How does calling work in Runo?
                                                         </button>
                                                     </h2>
-                                                    <div id="collapse49" class="accordion-collapse collapse show"
+                                                    <div id="collapse49" class="accordion-collapse collapse"
                                                         aria-labelledby="heading49" data-bs-parent="#accordionRuno1">
                                                         <div class="accordion-body">
                                                             Calls are initiated from the Runo app or mobile dialer but

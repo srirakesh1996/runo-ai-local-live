@@ -493,8 +493,8 @@
                                         }
                                     });
 
-                                    localStorage.setItem("videoSearchResults", JSON.stringify(results));
-                                    localStorage.setItem("videoSearchTerm", search);
+                                    sessionStorage.setItem("videoSearchResults", JSON.stringify(results));
+                                    sessionStorage.setItem("videoSearchTerm", search);
                                     window.location.href = "search-results";
                                 }
 
