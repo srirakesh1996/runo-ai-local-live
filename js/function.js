@@ -158,7 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 100);
 });
 /* Send utm to web.runo.in ends */
-
 function submitForm(formId, formData, formToken) {
   const $form = $(`#${formId}`);
   const $btn = $form.find("button[type='submit']");
@@ -174,9 +173,6 @@ function submitForm(formId, formData, formToken) {
   if (utmSource) formData["custom_utm source"] = utmSource;
   if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
 
-  // console.log("Submitting form:", formId);
-  //console.log("Form Data Sent to API:", formData);
-
   $.ajax({
     type: "POST",
     url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
@@ -187,7 +183,8 @@ function submitForm(formId, formData, formToken) {
     },
   })
     .done(function (data) {
-      //  console.log("✅ Success:", data);
+      console.log("Runo API response:", data);
+
       $form[0].reset();
       $btn.prop("disabled", false);
 
@@ -199,10 +196,24 @@ function submitForm(formId, formData, formToken) {
 
       // Show thank you modal always
       $("#thankYouModal").modal("show");
+
+      // Send data to Zapier webhook for email and Excel storage
+      $.ajax({
+        type: "POST",
+        url: "https://hooks.zapier.com/hooks/catch/your_zap_id/your_webhook_id/", // Replace with your Zapier webhook URL
+        data: JSON.stringify(formData),
+        contentType: "application/json",
+      })
+        .done(function (zapResp) {
+          console.log("Zapier webhook response:", zapResp);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error("Zapier webhook error:", textStatus, errorThrown);
+        });
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
-      //  console.log("❌ Error:", textStatus, errorThrown);
       $btn.prop("disabled", false);
+      console.error("Runo API error:", textStatus, errorThrown);
       alert("Oops! Something went wrong.");
     });
 }
