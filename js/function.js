@@ -158,3 +158,73 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 100);
 });
 /* Send utm to web.runo.in ends */
+
+function submitForm(formId, formData, formToken) {
+  const $form = $(`#${formId}`);
+  const $btn = $form.find("button[type='submit']");
+
+  $btn.prop("disabled", true);
+
+  // Retrieve UTM values from localStorage
+  const utmSource = localStorage.getItem("utm_source");
+  const utmCampaign = localStorage.getItem("utm_campaign");
+
+  // Enrich formData for Runo
+  formData["custom_source"] = "Website Enquiry- IB";
+  formData["custom_status"] = "Api Allocation";
+  if (utmSource) formData["custom_utm source"] = utmSource;
+  if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
+
+  // --- Send to Runo API ---
+  $.ajax({
+    type: "POST",
+    url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
+    data: JSON.stringify(formData),
+    contentType: "application/json",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .done(function (data) {
+      console.log("✅ Runo API Success:", data);
+      $form[0].reset();
+      $btn.prop("disabled", false);
+
+      const $modal = $form.closest(".modal");
+      if ($modal.length) {
+        $modal.modal("hide");
+      }
+
+      $("#thankYouModal").modal("show");
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("❌ Runo API Error:", textStatus, errorThrown);
+      $btn.prop("disabled", false);
+      alert("Oops! Something went wrong.");
+    });
+
+  // --- Send only name, email, phone to Zapier ---
+  const zapierData = {
+    name: formData.name || "",
+    email: formData.email || "",
+    phone: formData.phone || "",
+  };
+
+  console.log("📤 Sending to Zapier:", zapierData);
+
+  $.ajax({
+    type: "POST",
+    url: "https://hooks.zapier.com/hooks/catch/23685525/u39106q",
+    data: JSON.stringify(zapierData),
+    contentType: "application/json",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .done(function (response) {
+      console.log("✅ Zapier Response:", response);
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("❌ Zapier Error:", textStatus, errorThrown);
+    });
+}
