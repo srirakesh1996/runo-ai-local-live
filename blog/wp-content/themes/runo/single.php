@@ -43,17 +43,24 @@
     <div class="row">
         <!-- TOC Column - Hidden on small devices -->
         <div class="col-md-4 d-none d-md-block" style="margin-top: 30px;">
-            <div class="sticky-top" style="top: 120px;">
+            <div class="sticky-top" style="top: 100px;">
+
+                <!-- Back to Blogs Link -->
+                <div class="mb-3">
+                    <a href="http://localhost/runo-ai/blog" class="text-decoration-none" style="font-weight: 700; font-size: 16px; color: #321b3a;">
+                        &larr; &nbsp; Back to Blogs
+                    </a>
+                </div>
+
                 <?php echo do_shortcode('[toc]'); ?>
 
                 <!-- Minimal Sticky Promo Section -->
                 <div class="mt-4 p-3 rounded text-center" style="background: #fff0f0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                    <h6 class="fw-bold mb-1" style="color: #212121;color: #321b3a;font-size: 20px;padding: 10px 0px;">Boost Your Business Calls</h6>
+                    <h6 class="fw-bold mb-1" style="color: #321b3a; font-size: 20px; padding: 10px 0px;">Boost Your Business Calls</h6>
                     <p class="text-muted mb-3 small">Start your free trial of RUNO’s SIM-based call management today!</p>
-
-
-                    <a href="#" class="header-btn">Request Demo</a>
-
+                    <a href="#" class="header-btn track-btn" data-bs-toggle="modal" data-bs-target="#requestDemoModal" data-label="Book a Demo - Blogs">
+                        Request a Demo
+                    </a>
                 </div>
             </div>
         </div>
@@ -66,6 +73,14 @@
             if (have_posts()) :
                 while (have_posts()) : the_post();
             ?>
+                    <!-- Back to Blogs Link -->
+                    <div class="mb-3 d-md-none">
+                        <a href="http://localhost/runo-ai/blog" class="text-decoration-none" style="font-weight: 700; font-size: 16px; color: #321b3a;">
+                            &larr; &nbsp; Back to Blogs
+                        </a>
+                    </div>
+
+
                     <h1 class="mb-4"><?php the_title(); ?></h1>
 
                     <?php if (has_post_thumbnail()) : ?>

@@ -4,6 +4,7 @@
  * Theme Functions for Runo WordPress Blog
  */
 
+
 function runo_blog_assets()
 {
     $base_url = 'https://runo.ai';

@@ -8,10 +8,28 @@
     $base_url = 'https://runo.ai';
     ?>
 
-    <title><?php
-            bloginfo('name'); ?></title>
 
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Responsive Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow">
+    <!-- changed from no-index -->
+    <meta name="language" content="English">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://runo.ai/img/og/og-home.png">
+    <meta property="og:url" content="https://runo.ai/img/og/og-home.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://runo.ai/img/og/og-home.png">
+    <meta name="twitter:url" content="https://runo.ai/img/og/og-home.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?php echo $base_url; ?>/img/favicon.ico" sizes="16x16">
+    <!-- Performance: Preload Fonts & Styles -->
+    <link rel="preload" as="style" href="css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Google Fonts -->
@@ -19,7 +37,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <!-- Core Styles -->
-    <link rel="stylesheet" href="https://runo.ai/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://runo.ai/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="https://runo.ai/css/slicknav.min.css">
     <link rel="stylesheet" href="https://runo.ai/css/all.min.css">
     <link rel="stylesheet" href="https://runo.ai/css/custom.css">
@@ -32,30 +50,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/css/intlTelInput.min.css" />
     <!-- JS Libraries (Defer if possible to reduce INP) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/js/intlTelInput.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/js/utils.js"></script>
 
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-M7SSPG7W');
-    </script>
-    <!-- End Google Tag Manager -->
     <!-- Optional: WOW.js & Animate.css -->
     <!--
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -67,8 +65,6 @@
          </script>
          -->
     <!-- Inline Hero Banner Style -->
-
-
 
     <?php wp_head(); ?>
 </head>
@@ -376,7 +372,7 @@
                                             href="https://web.runo.in/">Login</a></li>
                                     <li class="nav-item">
                                         <a class="header-btn track-btn" href="#" data-bs-toggle="modal" data-bs-target="#requestDemoModal"
-                                            data-label="Book a Demo - Home Header">Request a
+                                            data-label="Book a Demo - Blog Header">Request a
                                             Demo</a>
                                     </li>
                                     <div class="app-header-icons">

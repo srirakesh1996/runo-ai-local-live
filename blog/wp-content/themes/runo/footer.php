@@ -15,8 +15,8 @@
                      </li>
                  </ul>
                  <h6 class="fw-bold mt-4 mb-2 text-white">Contact</h6>
-                 <a href="mailto:care@runo.in">
-                     <p class="mb-1 text-white ptb-5"><i class="fas fa-envelope me-2"></i> care@runo.in</p>
+                 <a href="mailto:care@runo.ai">
+                     <p class="mb-1 text-white ptb-5"><i class="fas fa-envelope me-2"></i> care@runo.ai</p>
                  </a>
                  <a href="tel:+91 8179880074">
                      <p class="text-white ptb-5"><i class="fas fa-phone me-2"></i> +91 8179880074</p>
@@ -56,8 +56,7 @@
              <div class="col-6 col-md-6 col-lg-2">
                  <h6 class="text-white fw-bold mb-3">RESOURCES</h6>
                  <ul class="list-unstyled">
-                     <li><a href="https://blog.runo.in/" class="text-light text-decoration-none d-block mb-1">Blog</a>
-                     </li>
+
                      <li><a href="https://docs.runo.in/" class="text-light text-decoration-none d-block mb-1">API
                              Documentation</a>
                      </li>
@@ -115,19 +114,18 @@
          <!-- Footer Copyright -->
          <div class="footer-copyright">
              <div class="row align-items-center">
-                 <div class="col-md-5">
+                 <div class="col-md-4">
                      <div class="footer-copyright-text">
                          <p>&copy; 2025 Runo. All Rights Reserved.</p>
                      </div>
                  </div>
-                 <div class="col-md-7">
+                 <div class="col-md-8">
                      <div class="footer-menu">
                          <ul>
                              <li><a href="<?php echo $base_url; ?>/terms-and-conditions">Terms & Conditions</a></li>
                              <li><a href="<?php echo $base_url; ?>/privacy-policy">Privacy Policy</a></li>
                              <li><a href="<?php echo $base_url; ?>/cancellation-and-refund-policy">Usage Policy</a></li>
                              <li><a href="<?php echo $base_url; ?>/data-security">Data Security</a></li>
-
                          </ul>
                      </div>
                  </div>
@@ -157,8 +155,6 @@
  <script src="<?php echo $base_url; ?>/js/parallaxie.js" defer></script>
  <!-- WOW.js -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" defer></script>
- <!-- Custom JS (Deferred) -->
-
 
  <script>
      function submitForm(formId, formData, formToken) {
@@ -248,6 +244,9 @@
              });
      }
  </script>
+
+ <!-- Custom JS (Deferred) -->
+ <script src="<?php echo $base_url; ?>/js/function.js" defer></script>
 
  <!-- UTM Tracker -->
  <script>
