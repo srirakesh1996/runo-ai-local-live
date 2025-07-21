@@ -201,10 +201,11 @@ function submitForm(formId, formData, formToken) {
     });
 
   // --- Send only name, email, phone to Zapier ---
+  const formattedPhone = formData.phone.replace(/\D/g, ""); // remove non-digits
   const zapierData = {
     name: formData.name || "",
     email: formData.email || "",
-    phone: formData.phone || "",
+    phone: formattedPhone || "",
   };
 
   console.log("📤 Sending to Zapier:", zapierData);

@@ -5,16 +5,14 @@
  */
 
 
-add_filter('pre_get_document_title', function () {
-    // Fully customize the output
-    if (is_home() || is_front_page()) {
-        return 'Blogs | Runo';
+add_filter('document_title_parts', function ($title) {
+    if (is_home() && !is_front_page()) {
+        $title['title'] = 'Latest Blogs';
+        $title['site'] = 'Runo';
+        $title['tagline'] = ''; // Optional: remove tagline if you don’t want it
     }
-
-    // For all other pages/posts, use title + site name
-    return single_post_title('', false) . ' | ' . get_bloginfo('name');
+    return $title;
 });
-
 
 add_theme_support('title-tag');
 

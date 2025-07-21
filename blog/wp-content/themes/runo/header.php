@@ -7,7 +7,25 @@
     <?php
     $base_url = 'https://runo.ai';
     ?>
+    <?php
+    // Detect blog listing at /blog/ (WordPress installed in /blog/)
+    if (is_home() && !is_front_page()) {
+        $custom_title = 'Latest Blogs | Runo';
+        $custom_desc = 'Explore the latest blog posts and insights from the Runo team. Stay updated on CRM, sales strategies, and more.';
+    } elseif (is_singular()) {
+        $custom_title = single_post_title('', false) . ' | ' . get_bloginfo('name');
+        $custom_desc = get_the_excerpt();
+    } else {
+        $custom_title = get_bloginfo('name');
+        $custom_desc = get_bloginfo('description');
+    }
+    ?>
 
+    <title><?php echo esc_html($custom_title); ?></title>
+    <meta name="description" content="<?php echo esc_attr($custom_desc); ?>">
+
+    <title><?php echo esc_html($custom_title); ?></title>
+    <meta name="description" content="<?php echo esc_attr($custom_desc); ?>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Responsive Viewport -->

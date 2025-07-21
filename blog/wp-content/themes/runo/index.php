@@ -1,4 +1,9 @@
-<?php get_header(); ?>
+<?php
+
+/**
+ * Template Name: Blog Listing
+ */
+get_header(); ?>
 
 <style>
     .blogs .card-body {
@@ -6,7 +11,6 @@
     }
 
     .blog-card {
-
         height: 100%;
         border: 1px solid #ddd;
         border-radius: 6px;
@@ -14,7 +18,6 @@
     }
 
     .blog-card .card-head {
-
         max-width: 100%;
     }
 
@@ -40,24 +43,23 @@
     }
 </style>
 
-
-
 <div class="blogs">
     <div class="container py-5">
         <h1 class="mb-20 text-center">Latest Blog Posts</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4"><?php
-                                                        // Custom query for 1 post per page
-                                                        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <?php
+            // Custom query for blog posts
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-                                                        $args = [
-                                                            'posts_per_page' => 15,
-                                                            'paged' => $paged,
-                                                        ];
+            $args = [
+                'posts_per_page' => 15,
+                'paged' => $paged,
+            ];
 
-                                                        $custom_query = new WP_Query($args);
+            $custom_query = new WP_Query($args);
 
-                                                        if ($custom_query->have_posts()) :
-                                                            while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+            if ($custom_query->have_posts()) :
+                while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
                     <div class="col">
                         <div class="card blog-card h-100">
                             <div class="card-head">
@@ -74,27 +76,39 @@
                             </div>
                         </div>
                     </div>
-                <?php
-                                                            endwhile;
-                                                        else : ?><p>No posts found.</p><?php endif; ?>
+                <?php endwhile;
+            else : ?>
+                <p>No posts found.</p>
+            <?php endif; ?>
         </div>
-        <!-- Pagination -->
-        <div class="mt-5"><?php
-                            $pagination = paginate_links([
-                                'total' => $custom_query->max_num_pages,
-                                'current' => $paged,
-                                'prev_text' => '&laquo;',
-                                'next_text' => '&raquo;',
-                                'type' => 'array',
-                            ]);
 
-                            if (!empty($pagination)) :
-                            ?><nav>
-                    <ul class="pagination justify-content-center"><?php foreach ($pagination as $page) : ?><li class="page-item <?php if (strpos($page, 'current') !== false) echo 'active'; ?>"><?php echo str_replace('page-numbers', 'page-link', $page); ?></li><?php endforeach; ?></ul>
-                </nav><?php endif; ?></div>
+        <!-- Pagination -->
+        <div class="mt-5">
+            <?php
+            $pagination = paginate_links([
+                'total' => $custom_query->max_num_pages,
+                'current' => $paged,
+                'prev_text' => '&laquo;',
+                'next_text' => '&raquo;',
+                'type' => 'array',
+            ]);
+
+            if (!empty($pagination)) :
+            ?>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <?php foreach ($pagination as $page) : ?>
+                            <li class="page-item <?php if (strpos($page, 'current') !== false) echo 'active'; ?>">
+                                <?php echo str_replace('page-numbers', 'page-link', $page); ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </nav>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 
-<?php wp_reset_postdata(); ?>
-
-<?php get_footer(); ?>
+<?php
+wp_reset_postdata();
+get_footer();
