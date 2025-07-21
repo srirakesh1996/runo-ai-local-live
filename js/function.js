@@ -15,20 +15,14 @@
     });
 
     function setHeaderHeight() {
-      $("header.main-header").css(
-        "height",
-        $("header .header-sticky").outerHeight()
-      );
+      $("header.main-header").css("height", $("header .header-sticky").outerHeight());
     }
 
     $window.on("scroll", function () {
       var fromTop = $(window).scrollTop();
       setHeaderHeight();
       var headerHeight = $("header .header-sticky").outerHeight();
-      $("header .header-sticky").toggleClass(
-        "hide",
-        fromTop > headerHeight + 100
-      );
+      $("header .header-sticky").toggleClass("hide", fromTop > headerHeight + 100);
       $("header .header-sticky").toggleClass("active", fromTop > 600);
     });
   }
@@ -170,11 +164,14 @@ function submitForm(formId, formData, formToken) {
   const utmCampaign = localStorage.getItem("utm_campaign");
 
   // Enrich formData for Runo
-  formData["custom_source"] = "Website Enquiry- IB";
+  if (!formData["custom_source"]) {
+    formData["custom_source"] = "Website Enquiry- IB";
+  }
   formData["custom_status"] = "Api Allocation";
   if (utmSource) formData["custom_utm source"] = utmSource;
   if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
 
+  console.log("📤 Sending to Runo API:", formData);
   // --- Send to Runo API ---
   $.ajax({
     type: "POST",
@@ -214,7 +211,7 @@ function submitForm(formId, formData, formToken) {
 
   $.ajax({
     type: "POST",
-    url: "https://hooks.zapier.com/hooks/catch/23685525/u39106q",
+    url: "https://hooks.zapier.com/hooks/catch/23828444/u2kay84/",
     data: JSON.stringify(zapierData),
     contentType: "application/json",
     headers: {

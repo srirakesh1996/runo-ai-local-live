@@ -50,13 +50,13 @@
                      <li><a href="<?php echo $base_url; ?>/contact" class="text-light text-decoration-none d-block mb-1">Contact sales</a>
                      </li>
                      <li><a href="<?php echo $base_url; ?>/faq" class="text-light text-decoration-none d-block mb-1">FAQ</a></li>
+                     <li><a href="<?php echo $base_url; ?>/tutorials" class="text-light text-decoration-none d-block mb-1">Product Tutorials</a></li>
                  </ul>
              </div>
              <!-- Resources -->
              <div class="col-6 col-md-6 col-lg-2">
                  <h6 class="text-white fw-bold mb-3">RESOURCES</h6>
                  <ul class="list-unstyled">
-
                      <li><a href="https://docs.runo.in/" class="text-light text-decoration-none d-block mb-1">API
                              Documentation</a>
                      </li>
@@ -172,7 +172,9 @@
          if (utmSource) formData["custom_utm source"] = utmSource;
          if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
 
-         // ✅ Send to Runo CRM (unchanged)
+         // console.log("Submitting form:", formId);
+         //console.log("Form Data Sent to API:", formData);
+
          $.ajax({
                  type: "POST",
                  url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
@@ -183,70 +185,48 @@
                  },
              })
              .done(function(data) {
+                 //  console.log("✅ Success:", data);
                  $form[0].reset();
                  $btn.prop("disabled", false);
 
-                 const modalEl = $form.closest(".modal")[0];
-                 if (modalEl) {
-                     const modalInstance = bootstrap.Modal.getInstance(modalEl);
-                     if (modalInstance) {
-                         // 👇 Attach event listener to show thank you modal after this one hides
-                         modalEl.addEventListener('hidden.bs.modal', function handler() {
-                             modalEl.removeEventListener('hidden.bs.modal', handler); // Clean up
-
-                             // ✅ Show thank you modal after request modal is fully hidden
-                             const thankYouModalEl = document.getElementById("thankYouModal");
-                             if (thankYouModalEl) {
-                                 const thankYouModal = new bootstrap.Modal(thankYouModalEl);
-                                 thankYouModal.show();
-                             }
-                         });
-
-                         modalInstance.hide(); // Hide the request modal
-                     }
-                 } else {
-                     // Fallback if no modal (just show thank you modal)
-                     const thankYouModalEl = document.getElementById("thankYouModal");
-                     if (thankYouModalEl) {
-                         const thankYouModal = new bootstrap.Modal(thankYouModalEl);
-                         thankYouModal.show();
-                     }
+                 // Check if form is inside a modal and close it if yes
+                 const $modal = $form.closest(".modal");
+                 if ($modal.length) {
+                     $modal.modal("hide");
                  }
+
+                 // Show thank you modal always
+                 $("#thankYouModal").modal("show");
              })
              .fail(function(jqXHR, textStatus, errorThrown) {
+                 //  console.log("❌ Error:", textStatus, errorThrown);
                  $btn.prop("disabled", false);
                  alert("Oops! Something went wrong.");
              });
 
-         // ✅ Send to Zapier via backend proxy (zap.php)
-         // Prepare Zapier-specific payload
-         const zapierPayload = {
-             name: formData.your_name,
-             email: formData.your_email,
-             phone: formData.your_phone,
-             status: "Website Form",
-             added_on: new Date().toISOString(),
+         // 🔹 2. Prepare Zapier Data (field mapping)
+         const zapierData = {
+             name: formData["your_name"] || "",
+             email: formData["your_email"] || "",
+             phone: formData["your_phone"] || "",
          };
 
-         // ✅ Send to Zapier via PHP proxy
+         // 🔹 3. Send to Zapier
          $.ajax({
-                 type: "POST",
-                 url: "http://localhost/runo-ai/zap.php", // Make sure this path is correct
-                 data: JSON.stringify(zapierPayload),
-                 contentType: "application/json",
-             })
-             .done(function(response) {
-                 console.log("✅ Zapier success:", response);
-             })
-             .fail(function(jqXHR, textStatus, errorThrown) {
-                 console.error("❌ Zapier error:", textStatus, errorThrown);
-                 console.log("❌ Zapier full error response:", jqXHR.responseText);
-             });
+             type: "POST",
+             url: "https://hooks.zapier.com/hooks/catch/23828444/u2kay84/",
+             data: zapierData, // form-encoded
+             success: function(response) {
+                 console.log("✅ Zapier response:", response);
+             },
+             error: function(jqXHR, textStatus, errorThrown) {
+                 console.warn("⚠️ Zapier call failed:", textStatus, errorThrown);
+                 console.log("🔍 Response text:", jqXHR.responseText);
+             },
+         });
      }
  </script>
 
- <!-- Custom JS (Deferred) -->
- <script src="<?php echo $base_url; ?>/js/function.js" defer></script>
 
  <!-- UTM Tracker -->
  <script>

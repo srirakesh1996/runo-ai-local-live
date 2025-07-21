@@ -5,13 +5,27 @@
  */
 
 
+add_filter('pre_get_document_title', function () {
+    // Fully customize the output
+    if (is_home() || is_front_page()) {
+        return 'Blogs | Runo';
+    }
+
+    // For all other pages/posts, use title + site name
+    return single_post_title('', false) . ' | ' . get_bloginfo('name');
+});
+
+
+add_theme_support('title-tag');
+
 function runo_blog_assets()
 {
     $base_url = 'https://runo.ai';
 
     // Enqueue main theme style
     wp_enqueue_style('runo-style', get_stylesheet_uri());
-
+    // ✅ Enqueue custom.js from theme directory
+    wp_enqueue_script('runo-custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array('jquery'), null, true);
     // Enqueue your custom CSS files
     wp_enqueue_style('runo-custom-css', $base_url . '/assets/custom.css');
     wp_enqueue_style('runo-css', $base_url . '/assets/runo.css');

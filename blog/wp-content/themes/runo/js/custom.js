@@ -15,20 +15,14 @@
     });
 
     function setHeaderHeight() {
-      $("header.main-header").css(
-        "height",
-        $("header .header-sticky").outerHeight()
-      );
+      $("header.main-header").css("height", $("header .header-sticky").outerHeight());
     }
 
     $window.on("scroll", function () {
       var fromTop = $(window).scrollTop();
       setHeaderHeight();
       var headerHeight = $("header .header-sticky").outerHeight();
-      $("header .header-sticky").toggleClass(
-        "hide",
-        fromTop > headerHeight + 100
-      );
+      $("header .header-sticky").toggleClass("hide", fromTop > headerHeight + 100);
       $("header .header-sticky").toggleClass("active", fromTop > 600);
     });
   }
@@ -121,50 +115,39 @@
     });
   }
 })(jQuery);
-function submitForm(formId, formData, formToken) {
-  const $form = $(`#${formId}`);
-  const $btn = $form.find("button[type='submit']");
+/* Send utm to web.runo.in Starts */
+document.addEventListener("DOMContentLoaded", function () {
+  const interval = setInterval(() => {
+    const buttons = document.querySelectorAll(".runo-web-crm");
 
-  $btn.prop("disabled", true);
+    if (buttons.length > 0) {
+      clearInterval(interval);
 
-  // Retrieve UTM values from localStorage
-  const utmSource = localStorage.getItem("utm_source");
-  const utmCampaign = localStorage.getItem("utm_campaign");
+      const utmSource = localStorage.getItem("utm_source");
+      const utmCampaign = localStorage.getItem("utm_campaign");
 
-  formData["custom_source"] = "Website Enquiry- IB";
-  formData["custom_status"] = "Api Allocation";
-  if (utmSource) formData["custom_utm source"] = utmSource;
-  if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
+      const baseUrl = "https://web.runo.in";
+      const params = new URLSearchParams();
 
-  // console.log("Submitting form:", formId);
-  //console.log("Form Data Sent to API:", formData);
+      if (utmSource) params.append("utm_source", utmSource);
+      if (utmCampaign) params.append("utm_campaign", utmCampaign);
 
-  $.ajax({
-    type: "POST",
-    url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
-    data: JSON.stringify(formData),
-    contentType: "application/json",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .done(function (data) {
-      //  console.log("âœ… Success:", data);
-      $form[0].reset();
-      $btn.prop("disabled", false);
+      if (params.toString()) {
+        const finalUrl = `${baseUrl}?${params.toString()}`;
+        // console.log("✅ Updating all .runo-crm buttons to:", finalUrl);
 
-      // Check if form is inside a modal and close it if yes
-      const $modal = $form.closest(".modal");
-      if ($modal.length) {
-        $modal.modal("hide");
+        buttons.forEach((btn) => {
+          // Set href
+          btn.href = finalUrl;
+
+          // Force redirect on click
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = finalUrl;
+          });
+        });
       }
-
-      // Show thank you modal always
-      $("#thankYouModal").modal("show");
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      //  console.log("âŒ Error:", textStatus, errorThrown);
-      $btn.prop("disabled", false);
-      alert("Oops! Something went wrong.");
-    });
-}
+    }
+  }, 100);
+});
+/* Send utm to web.runo.in ends */
