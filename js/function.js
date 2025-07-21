@@ -200,7 +200,7 @@ function submitForm(formId, formData, formToken) {
       alert("Oops! Something went wrong.");
     });
 
-  // --- Send only name, email, phone to Zapier ---
+  // --- Send only name, email, phone to Zapier email & whatsapp ---
   const formattedPhone = formData.phone.replace(/\D/g, ""); // remove non-digits
   const zapierData = {
     name: formData.name || "",
